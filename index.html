@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" class="scroll-smoth ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio Azi</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Navbar (Fix sesuai foto) -->
+  <style>
+    /* Custom toggle button bulat */
+    .toggle-darkmode {
+      @apply w-10 h-10 rounded-full flex items-center justify-center bg-white dark:bg-gray-700 shadow;
+    }
+
+    html{
+         scroll-behavior: smooth;
+    }
+
+      
+
+     #cursor {
+    transform: translate(-50%, -50%);
+  }
+
+:root {
+  --gap: 6rem; /* jarak lebih longgar antara foto dan teks */
+}
+
+.about-section {
+  background: white;
+  padding: 3rem 1.5rem;
+  color: #1f2937;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  height: 550px;
+
+  display: flex;
+  align-items: center; /* vertikal center */
+  /* justify-content: center; */
+}
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--gap);
+}
+
+.about-photo {
+  position: relative;
+  width: 280px;
+  height: 320px;
+  flex-shrink: 0;
+}
+
+.photo-bg {
+  position: absolute;
+  left: -12px;
+  bottom: -12px;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 14px;
+  z-index: 5;
+  transform: scale(1.02);
+  filter: brightness(0.9);
+}
+
+.photo-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px dashed transparent;
+  border-radius: 14px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.photo-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.photo-img:hover {
+  transform: scale(1.04) rotate(1deg);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+.about-text {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  line-height: 1.3;
+  font-size: 0.95rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 8px;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.label {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.value {
+  color: #4b5563;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 6px;
+}
+
+.cv-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+}
+
+.social a {
+  color: #1f2937;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.social a:hover {
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .about-section {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem 1rem;
+    align-items: flex-start;
+  }
+
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-photo {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text {
+    align-items: center;
+  }
+
+  .info-grid {
+    justify-content: center;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}
+
+
+.skill-icon {
+  font-size: 4rem; /* ukuran besar sesuai gambar */
+  color: #fff;
+  transition: transform .25s ease, color .25s ease;
+  display: block;
+}
+
+.skill-card {
+  cursor: pointer;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.1);
+}
+
+/* Hover warna spesifik */
+.skill-card .skill-icon.html:hover { color: #e34f26; }      /* HTML orange */
+.skill-card .skill-icon.bootstrap:hover { color: #7952b3; } /* Bootstrap purple */
+.skill-card .skill-icon.php:hover { color: #787cb5; }       /* PHP indigo */
+.skill-card .skill-icon.laravel:hover { color: #f05340; }   /* Laravel red */
+.skill-card .skill-icon.figma:hover {background: linear-gradient(90deg, #f24e1e, #ff7262, #a259ff, #1abcfe, #0acf83);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* fallback */
+  transition: 0.3s; }     /* Figma orange */
+
+
+
+    
+  </style>
+</head>
+<body>
+<!-- Navbar (Fix sesuai foto) -->
+<header class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl">
+  <div class="flex flex-wrap items-center justify-between gap-4 px-6 py-3 bg-white/90 dark:bg-black shadow-md rounded-xl backdrop-blur-md">
+
+    <!-- Logo -->
+    <div class="font-bold text-lg text-gray-900 dark:text-white">AZI.</div>
+
+    <!-- Nav Links -->
+    <nav id="navMenu"
+      class="w-full md:w-auto hidden md:flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 text-sm font-medium">
+      <a href="#" class="relative after:content-[''] after:block after:h-[2px] after:bg-black dark:after:bg-white after:w-full after:absolute after:-bottom-1 after:left-0 after:origin-left after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 dark:text-white">
+        Home
+      </a>
+      <a href="#about" class="relative after:content-[''] after:block after:h-[2px] after:bg-black dark:after:bg-white after:w-full after:absolute after:-bottom-1 after:left-0 after:origin-left after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 dark:text-white">
+        About
+      </a>
+      <a href="#skill" class="relative after:content-[''] after:block after:h-[2px] after:bg-black dark:after:bg-white after:w-full after:absolute after:-bottom-1 after:left-0 after:origin-left after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 dark:text-white">
+        Skill
+      </a>
+      <a href="#project" class="relative after:content-[''] after:block after:h-[2px] after:bg-black dark:after:bg-white after:w-full after:absolute after:-bottom-1 after:left-0 after:origin-left after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 dark:text-white">
+        Project
+      </a>
+      <a href="#contact" class="relative after:content-[''] after:block after:h-[2px] after:bg-black dark:after:bg-white after:w-full after:absolute after:-bottom-1 after:left-0 after:origin-left after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 dark:text-white">
+        Contact
+      </a>
+    </nav>
+
+    <!-- Right controls (dark mode + hamburger) -->
+    <div class="flex items-center space-x-3 ml-auto md:ml-0">
+      <!-- Dark Mode Toggle -->
+      <button id="modeToggle" aria-label="Toggle dark/light mode"
+        class="w-10 h-10 rounded-full flex items-center justify-center bg-black dark:bg-white shadow text-white dark:text-black">
+        <i class="fas fa-moon"></i>
+      </button>
+
+      <!-- Hamburger (mobile only) -->
+      <button id="menuToggle" class="md:hidden text-gray-900 dark:text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav (muncul saat klik hamburger) -->
+  <nav id="mobileNav" class="md:hidden hidden px-6 py-3 space-y-4 text-sm font-medium bg-white dark:bg-black rounded-b-xl shadow-md">
+    <a href="#" class="block dark:text-white">Home</a>
+    <a href="#about" class="block dark:text-white">About</a>
+    <a href="#skill" class="block dark:text-white">Skill</a>
+    <a href="#project" class="block dark:text-white">Project</a>
+    <a href="#contact" class="block dark:text-white">Contact</a>
+  </nav>
+</header>
+
+
+
+
+
+  <!-- Hero Section -->
+  <section class="h-screen bg-cover bg-center flex items-center justify-center text-center relative"
+  style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');">
+  
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+  <!-- Teks Utama -->
+  <div class="z-10 text-white px-4 dark:text-gray-100" data-aos="fade-up" data-aos-duration="1000">
+    <h1 class="text-3xl md:text-5xl font-bold mb-2 ">HI ! I’M AZI SAPUTRA</h1>
+    <p class="text-sm md:text-base font-light tracking-wide mb-6">WEB DEVELOPMENT | UI/UX DESIGN</p>
+    
+    <!-- Tombol -->
+    <a href="#about"
+       class="bg-white text-black px-5 py-2 rounded hover:bg-gray-300 transition
+              dark:bg-black dark:text-white dark:hover:bg-gray-800">
+      MORE ABOUT ME
+    </a>
+  </div>
+
+  <!-- Panah ke bawah -->
+  <a href="#about" class="absolute bottom-10 animate-bounce text-white text-3xl">⌄</a>
+</section>
+
+
+<!-- Pastikan sudah include Tailwind CSS + Font Awesome di <head> -->
+<!-- Contoh: 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="...">
+-->
+<section id="about" class="about-section bg-white dark:bg-[url('bg-about.png')] bg-cover bg-center dark:bg-no-repeat transition-colors duration-300">
+  <div class="about-container">
+    
+    <!-- FOTO -->
+    <div class="about-photo" data-aos="fade-up" data-aos-duration="1000">
+      <div class="photo-bg dark:bg-white"></div>
+      <div class="photo-ring"></div>
+      <img src="portofolio.jpg" alt="Foto Azi Saputra" class="photo-img">
+    </div>
+
+    <!-- TEKS -->
+    <div class="about-text text-gray-800 dark:text-white" data-aos="fade-left" data-aos-duration="1000">
+      <h2 class="title text-3xl font-bold dark:text-white">Tentang Saya</h2>
+
+      <p class="description dark:text-gray-300">
+        Nama saya <strong class="dark:text-white">Azi Saputra</strong>, seorang desainer web dan pengembang front-end asal Indonesia yang berbasis di Bogor. Saya fokus menciptakan pengalaman yang bersih, kreatif, dan ramah pengguna. Saya membangun situs web dan menciptakan desain yang indah dan canggih.
+      </p>
+
+      <div class="info-grid text-sm">
+        <div class="label dark:text-white">Alamat</div>
+        <div class="value dark:text-gray-300">: Kota Bogor, Kec Ciawi</div>
+
+        <div class="label dark:text-white">Tanggal Lahir</div>
+        <div class="value dark:text-gray-300">: 20 Februari 2008</div>
+
+        <div class="label dark:text-white">Telepon</div>
+        <div class="value dark:text-gray-300">: 0857-1645-1180</div>
+      </div>
+
+      <div class="actions">
+        <a href="cv.png" download>
+        <button class="cv-btn dark:bg-white dark:text-black">
+          <i class="fa-solid fa-file-arrow-down"></i> Download CV
+        </button>
+        </a>
+          <a href="" aria-label="Facebook" class="dark:text-white"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://github.com/muhamadaji299" aria-label="GitHub" class="dark:text-white"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/jii_sptr4/" aria-label="Instagram" class="dark:text-white"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="skill" class="bg-[#212529] py-16">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h3 class="font-bold text-gray-400 mb-3 text-5xl">Kemampuan Saya</h3>
+    <p class="mb-10 text-gray-300">Beberapa skill yang saya kuasai dalam pengembangan web.</p>
+
+    <div class="grid gap-12 justify-items-center"
+         style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+      <div class="skill-card" data-aos="zoom-in">
+        <i class="fab fa-html5 skill-icon html"></i>
+        <p class="mt-3 text-sm text-gray-200">HTML</p>
+      </div>
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+        <i class="fab fa-bootstrap skill-icon bootstrap"></i>
+        <p class="mt-3 text-sm text-gray-200">Bootstrap</p>
+      </div>
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+        <i class="fab fa-php skill-icon php"></i>
+        <p class="mt-3 text-sm text-gray-200">PHP</p>
+      </div>
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+        <i class="fab fa-laravel skill-icon laravel"></i>
+        <p class="mt-3 text-sm text-gray-200">LARAVEL</p>
+      </div>
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
+        <i class="fab fa-figma skill-icon figma"></i>
+        <p class="mt-3 text-sm text-gray-200">FIGMA</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <section id="project" class="py-20 bg-gray-100 dark:bg-black transition duration-300">
+  <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-4 dark:text-white">PROJECT</h2>
+    <p class="mb-10 text-gray-600 dark:text-gray-300">Beberapa project terbaik yang pernah saya kerjakan</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden hover:scale-[1.03] hover:shadow-xl transition-all duration-300 flex flex-col h-full" data-aos="zoom-in">
+        <img src="projek-ebook.png" alt="Project 1" class="w-full h-48 object-cover">
+        <div class="p-5 text-left flex flex-col flex-1">
+          <div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">E-Book</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Sebuah website yg menyediakan Elektronik book dan mudah di gunakan bagi pembaca.</p>
+          </div>
+          <div class="flex justify-between mt-auto">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 (duplikat yang sama) -->
+      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden hover:scale-[1.03] hover:shadow-xl transition-all duration-300 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="100">
+        <img src="projek-goflast.png" alt="Project 2" class="w-full h-48 object-cover">
+        <div class="p-5 text-left flex flex-col flex-1">
+          <div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">Go-Flast</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Sebuah website yg menyediakan layanan antar jemput bagi pengguna</p>
+          </div>    
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden hover:scale-[1.03] hover:shadow-xl transition-all duration-300 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="200">
+        <img src="projek-wbproperti.png" alt="Project 3" class="w-full h-48 object-cover">
+        <div class="p-5 text-left flex flex-col flex-1">
+          <div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">AZIPROPERTI</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Website yg menyajikan layanan properti seperti rumah web ini menyediakan layanan properti</p>
+          </div>
+          <div class="flex justify-between mt-auto">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 (placeholder supaya pasangan dua-dua tetap rapi) -->
+      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden hover:scale-[1.03] hover:shadow-xl transition-all duration-300 flex flex-col h-full" data-aos="zoom-in" data-aos-delay="300">
+        <img src="projek-mockupapk.png" alt="Project 4" class="w-full h-48 object-cover">
+        <div class="p-5 text-left flex flex-col flex-1">
+          <div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">Design Apk Camp here</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Sebuah Design apk yg saya kerjakan yg bernama camp here sebuah aplikasi yg akan di gunakan untuk menyediakan layanan camping bagi pengguna</p>
+          </div>
+          <div class="flex justify-between mt-auto">
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="bg-[#212529] text-white  flex items-center justify-center px-4" style="min-height:110dvh;" >
+  <div class="w-full max-w-md">
+    <h2 class="text-center text-2xl font-bold mb-6 relative" data-aos="fade-down" data-aos-duration="800">
+      CONTACT
+      <span class="block w-16 h-1 bg-white mx-auto mt-2"></span>
+    </h2>
+
+    <form class="space-y-4">
+      <!-- Name -->
+      <input
+        type="text"
+        placeholder="Name"
+        data-aos="fade-right"
+        data-aos-delay="100"
+        class="w-full px-4 py-2 bg-gray-200 text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <!-- Email -->
+      <input
+        type="email"
+        placeholder="Email"
+        data-aos="fade-left"
+        data-aos-delay="200"
+        class="w-full px-4 py-2 bg-gray-200 text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <!-- Message -->
+      <textarea
+        rows="5"
+        placeholder="Message"
+        data-aos="fade-up"
+        data-aos-delay="300"
+        class="w-full px-4 py-2 bg-gray-200 text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      ></textarea>
+
+      <!-- Button -->
+      <div class="text-center" data-aos="zoom-in" data-aos-delay="400">
+        <button
+          type="submit"
+          class="px-6 py-2 bg-white text-black font-semibold rounded hover:bg-gray-300 transition"
+        >
+          SEND
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="bg-white dark:bg-black transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between gap-8">
+    <!-- Kiri -->
+    <div class="flex-1">
+      <h3 class="text-sm font-bold mb-2 text-gray-900 dark:text-white">Portofolio.</h3>
+      <p class="text-xs text-gray-600 dark:text-gray-300">
+        Web portofolio ini adalah web yg menjelaskan tentang diri saya. Mulai dari tentang diri saya sampai hasil dan project hasil buatan saya sendiri.
+      </p>
+    </div>
+
+    <!-- Kanan -->
+    <div class="flex-1 flex flex-col md:items-end justify-between">
+      <div class="flex gap-4 mb-4">
+        <a href="#" aria-label="Facebook"
+          class="text-gray-900 dark:text-white hover:opacity-80 transition text-lg">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://github.com/muhamadaji299" aria-label="GitHub"
+          class="text-gray-900 dark:text-white hover:opacity-80 transition text-lg">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/jii_sptr4/" aria-label="Instagram"
+          class="text-gray-900 dark:text-white hover:opacity-80 transition text-lg">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      <div class="text-right text-xs space-y-1 text-gray-700 dark:text-gray-300">
+        <p>Dibuat Oleh Muhammad Azi Saputra</p>
+        <p>Menggunakan Figma ©2025</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        backgroundImage: {
+          'about-dark': "url('bg-about.png')"
+        }
+      }
+    }
+  }
+
+    const modeToggle = document.getElementById('modeToggle');
+  const body = document.body;
+
+  // Cek preferensi atau simpanan sebelumnya
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const currentMode = localStorage.getItem('mode') || (prefersDark ? 'dark' : 'light');
+
+  if (currentMode === 'dark') {
+    body.classList.add('dark');
+    modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+
+  modeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+
+    if (body.classList.contains('dark')) {
+      modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      localStorage.setItem('mode', 'dark');
+    } else {
+      modeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      localStorage.setItem('mode', 'light');
+    }
+  });
+
+
+   const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("hidden");
+  });
+
+
+
+  AOS.init();
+
+  
+  </script>
+</body>
+</html>
