@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" class="scroll-smoth ">
+<html lang="en" data-theme="light" class="scroll-smoth">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <!-- Tambahkan di <head> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -218,7 +219,6 @@
       }
     }
 
-
     .skill-icon {
       font-size: 4rem;
       /* ukuran besar sesuai gambar */
@@ -359,13 +359,6 @@
       class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white text-3xl">⌄</a>
   </section>
 
-
-
-
-  <!-- Pastikan sudah include Tailwind CSS + Font Awesome di <head> -->
-  <!-- Contoh: 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="...">
--->
   <section id="about"
     class="about-section bg-white dark:bg-[url('bg-about.png')] bg-cover bg-center dark:bg-no-repeat transition-colors duration-300">
     <div class="about-container">
@@ -414,9 +407,6 @@
     </div>
     </div>
   </section>
-
-
-
 
   <section id="skill" class="bg-[#212529] py-16">
     <div class="max-w-4xl mx-auto px-6 text-center">
@@ -520,6 +510,41 @@
     </div>
   </section>
 
+  <section id="motivation" class="bg-white w-full py-16 flex flex-col items-center justify-center" data-aos="fade-up"
+    data-aos-duration="1000">
+    <h2 class="text-center mb-8 text-2xl font-bold" data-aos="zoom-in" data-aos-delay="100">Kumpulan Video Motivasi Dari
+      Saya</h2>
+    <div class="w-full max-w-xl" data-aos="fade-up" data-aos-delay="200">
+      <div class="swiper mySwiper rounded-lg shadow-lg">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="300">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/puP9k8E_t9g" title="Video 1"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="400">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/of-aGwSrsj0" title="Video 2"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="500">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/pw8_8g0X9kM" title="Video 3"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+        <!-- Navigasi -->
+        <div class="text-white swiper-pagination"></div>
+        <div class="text-white swiper-button-next"></div>
+        <div class="text-white swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- CONTACT -->
   <section id="contact" class="bg-[#212529] text-white  flex items-center justify-center px-4"
     style="min-height:110dvh;">
@@ -590,13 +615,14 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
+
+    //mode gelap dan terang
 
     tailwind.config = {
       darkMode: 'class',
     }
-
-    //mode gelap dan terang
 
     const modeToggle = document.getElementById('modeToggle');
     const body = document.body;
@@ -623,7 +649,7 @@
     });
 
 
-    //navbar
+    //aniamtion navbar
 
     const menuToggle = document.getElementById("menuToggle");
     const navMenu = document.getElementById("navMenu");
@@ -633,9 +659,24 @@
     });
 
     //animasi aos
-
-
     AOS.init();
+
+    // animasi slide pada video motivasi
+
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      effect: "scroll", // animasi slide
+    });
 
 
   </script>
